@@ -1,0 +1,11 @@
+name: CloudInventory
+main: de.lucawimmer.cloudinventory.CloudInventory
+version: ${version}
+authors:
+ - magl1te
+description: Multiinventory between servers
+commands:
+  farmwelt:
+    description: Main command
+    usage: /<command>
+    aliases: [ci]

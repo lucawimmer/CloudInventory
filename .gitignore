@@ -1,0 +1,75 @@
+# Created by .gitignore support plugin (hsz.mobi)
+### Global Gitignore template
+# Ignore paths that contain user-generated content.
+/sites/*/files
+/sites/*/private
+/files/*
+/cache
+
+# ** Only works in OSs that support newer versions of fnmatch (Bash 4+)
+/sites/default/**/files
+/sites/default/**/private
+
+# Packages #
+############
+*.7z
+*.dmg
+*.gz
+*.bz2
+*.iso
+*.rar
+*.tar
+*.zip
+*.tgz
+
+
+# Logs and databases #
+######################
+*.log
+*.sql
+
+# OS generated files #
+######################
+.DS_Store*
+ehthumbs.db
+Icon?
+Thumbs.db
+._*
+
+# Vim generated files #
+######################
+*.un~
+
+# SASS #
+##########
+.sass-cache
+
+# Exclude Intellj specific files
+.idea/
+*.iml
+*.ipr
+*.iws
+
+target/
+*.out
+*.log
+*.epoch
+*.lck
+
+*.settings/
+*.classpath
+*.project
+
+.gradle
+build/
+
+.gradle
+bin/
+tmp/
+*.tmp
+*.bak
+build/
+.test/
+
+
+.src/.test/
