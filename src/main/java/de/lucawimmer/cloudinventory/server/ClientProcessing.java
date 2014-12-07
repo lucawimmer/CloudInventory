@@ -1,10 +1,10 @@
 package de.lucawimmer.cloudinventory.server;
 
+import com.google.gson.Gson;
 import de.lucawimmer.cloudinventory.CloudInventory;
 import de.lucawimmer.cloudinventory.objects.ServerInfo;
 import de.lucawimmer.cloudinventory.storage.PufferStorage;
 import org.bukkit.Bukkit;
-import org.bukkit.craftbukkit.libs.com.google.gson.Gson;
 import org.json.simple.JSONObject;
 
 import javax.xml.bind.DatatypeConverter;

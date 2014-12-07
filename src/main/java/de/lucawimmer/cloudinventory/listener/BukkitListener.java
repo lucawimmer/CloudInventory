@@ -1,8 +1,6 @@
 package de.lucawimmer.cloudinventory.listener;
 
 import de.lucawimmer.cloudinventory.CloudInventory;
-import net.minecraft.server.v1_5_R3.NBTBase;
-import net.minecraft.server.v1_5_R3.NBTTagCompound;
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -38,7 +36,7 @@ public class BukkitListener implements Listener {
 
     @EventHandler
     public void onServerChange(PlayerQuitEvent e) throws IOException {
-        if(e.getQuitMessage().contains(("disconnected"))) {
+        if(e.getQuitMessage().contains(("disconnect.quitting"))) {
             if (!CloudInventory.getDefaultConfig().getBoolean("use-as-puffer") && !CloudInventory.getDefaultConfig().getBoolean("enable-puffer")) {
                 for (String s : CloudInventory.getDefaultConfig().getStringList("servers")) {
 

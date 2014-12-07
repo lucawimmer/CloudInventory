@@ -2,7 +2,7 @@ import org.apache.tools.ant.filters.ReplaceTokens
 
 apply plugin: 'java'
 
-sourceCompatibility = 1.5
+sourceCompatibility = 1.7
 version = '1.0-DEV'
 
 project.ext.PLUGIN_NAME = "CloudInventory"
@@ -11,6 +11,7 @@ project.ext.BUKKIT_HOME = project.HOME + "/Craftbukkit"
 compileJava.options.encoding = 'UTF-8'
 
 repositories {
+    mavenCentral()
     maven {
         url "http://repo.bukkit.org/content/groups/public/"
     }
@@ -22,6 +23,7 @@ repositories {
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.11'
     compile 'org.bukkit:bukkit:1.5.2-R1.0'
+    compile 'com.google.code.gson:gson:2.2.2'
 }
 
 task copyPlugin(dependsOn: 'jar', type: Copy) {
