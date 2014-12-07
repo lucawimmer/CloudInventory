@@ -1,12 +1,50 @@
+import org.apache.tools.ant.filters.ReplaceTokens
+
 apply plugin: 'java'
 
 sourceCompatibility = 1.5
-version = '1.0'
+version = '1.0-DEV'
+
+project.ext.PLUGIN_NAME = "CloudInventory"
+project.ext.HOME = "$System.env.HOME"
+project.ext.BUKKIT_HOME = project.HOME + "/Craftbukkit"
+compileJava.options.encoding = 'UTF-8'
 
 repositories {
-    mavenCentral()
+    maven {
+        url "http://repo.bukkit.org/content/groups/public/"
+    }
+    //maven {
+    //    url "http://lasagne.tgnmc.com:8081/nexus/content/groups/public/"
+    //}
 }
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.11'
+    compile 'org.bukkit:bukkit:1.5.2-R1.0'
 }
+
+task copyPlugin(dependsOn: 'jar', type: Copy) {
+    from 'build/libs/'
+    into "D:\\Projekte\\Test Server\\plugins"
+}
+
+// Replace text in plugin.yml
+processResources
+        {
+            // This will ensure that this task is redone when the versions change.
+            inputs.property "version", project.version
+
+            // Replace stuff in plugin.yml, nothing else
+            from(sourceSets.main.resources.srcDirs) {
+                include 'plugin.yml'
+
+                // Replace version
+                expand 'version': project.version
+            }
+
+            // Copy everything else, that's not the plugin.yml
+            from(sourceSets.main.resources.srcDirs) {
+                exclude 'plugin.yml'
+            }
+        }
