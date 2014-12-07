@@ -4,6 +4,7 @@ import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
 import de.lucawimmer.cloudinventory.CloudInventory;
 import org.bukkit.Bukkit;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.HashMap;
 
@@ -35,27 +36,72 @@ public class PufferStorage {
 
             @Override
             public void run() {
-                for (String s : waitingConnections.keySet()) {
+                for (final String s : waitingConnections.keySet()) {
                     if (Bukkit.getPlayer(s) != null) {
-                        Bukkit.getLogger().info(waitingConnections.get(s));
-                        ByteArrayDataOutput out = ByteStreams.newDataOutput();
-
-                        try {
-                            out.writeUTF("Connect");
-                            if (!waitingConnections.get(s).equals("default")) {
-                                out.writeUTF(waitingConnections.get(s));
-                            } else {
-                                out.writeUTF(CloudInventory.getDefaultConfig().getString("default-forward-server"));
-                            }
-                            Bukkit.getPlayer(s).sendPluginMessage((CloudInventory.getInstance()), "BungeeCord", out.toByteArray());
-                            removeConnectingPlayer(s);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
+                        final String dest = waitingConnections.get(s);
+                        removeConnectingPlayer(s);
+                        initiateTeleport(s, dest);
                     }
                 }
             }
         }, 10L, 1L);
+    }
 
+    private static void initiateTeleport(final String p, final String dest) {
+        if(Bukkit.getPlayer(p) != null) {
+            Bukkit.getServer().getScheduler().scheduleAsyncDelayedTask(CloudInventory.getInstance(), new Runnable() {
+                @Override
+                public void run() {
+
+                    new BukkitRunnable() {
+                        int seconds = 5;
+
+                        public void run() {
+                            if (seconds > -1) {
+                                switch (seconds) {
+                                    case 5:
+                                        Bukkit.getPlayer(p).sendMessage("§7[§6H§7] §fDu wirst in 5 Sekunden teleportiert.");
+                                        seconds--;
+                                        break;
+                                    case 4:
+                                        Bukkit.getPlayer(p).sendMessage("§7[§6H§7] §fDu wirst in 4 Sekunden teleportiert.");
+                                        seconds--;
+                                        break;
+                                    case 3:
+                                        Bukkit.getPlayer(p).sendMessage("§7[§6H§7] §fDu wirst in 3 Sekunden teleportiert.");
+                                        seconds--;
+                                        break;
+                                    case 2:
+                                        Bukkit.getPlayer(p).sendMessage("§7[§6H§7] §fDu wirst in 2 Sekunden teleportiert.");
+                                        seconds--;
+                                        break;
+                                    case 1:
+                                        Bukkit.getPlayer(p).sendMessage("§7[§6H§7] §fDu wirst in 1 Sekunden  teleportiert.");
+                                        seconds--;
+                                        break;
+                                    case 0:
+                                        try {
+                                            final ByteArrayDataOutput out = ByteStreams.newDataOutput();
+                                            out.writeUTF("Connect");
+                                            if (dest != null) {
+                                                if (!dest.equals("default")) {
+                                                    out.writeUTF(dest);
+                                                } else {
+                                                    out.writeUTF(CloudInventory.getDefaultConfig().getString("default-forward-server"));
+                                                }
+                                                Bukkit.getPlayer(p).sendPluginMessage((CloudInventory.getInstance()), "BungeeCord", out.toByteArray());
+                                            }
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
+                                        cancel();
+                                        break;
+                                }
+                            }
+                        }
+                    }.runTaskTimer(CloudInventory.getInstance(), 0, 20);
+                }
+            }, 20L * 4);
+        }
     }
 }
