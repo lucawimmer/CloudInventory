@@ -4,9 +4,12 @@ import de.lucawimmer.cloudinventory.CloudInventory;
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerPreLoginEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.json.simple.JSONObject;
 
 import javax.xml.bind.DatatypeConverter;
@@ -33,6 +36,22 @@ public class BukkitListener implements Listener {
     @EventHandler
     public void onServerJoined(PlayerJoinEvent e) {
         e.getPlayer().teleport(e.getPlayer().getWorld().getSpawnLocation());
+        if (CloudInventory.getDefaultConfig().getBoolean("use-as-puffer")) {
+            e.getPlayer().getInventory().clear();
+            e.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 999, 999));
+            e.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 999, 999));
+            e.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, 999, 999));
+            e.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.WITHER, 999, 999));
+            e.getPlayer().setWalkSpeed(0.0F);
+            e.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 10000, 128));
+        }
+    }
+
+    @EventHandler
+    public void onLostHealth(EntityDamageEvent e) {
+        if (CloudInventory.getDefaultConfig().getBoolean("use-as-puffer")) {
+            e.setCancelled(true);
+        }
     }
 
     @EventHandler

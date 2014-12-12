@@ -7,6 +7,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.HashMap;
+import java.util.Iterator;
 
 public class PufferStorage {
     private static HashMap<String, String> waitingConnections = new HashMap<String, String>();
@@ -36,10 +37,12 @@ public class PufferStorage {
 
             @Override
             public void run() {
-                for (final String s : waitingConnections.keySet()) {
+                Iterator<String> it = waitingConnections.keySet().iterator();
+                while (it.hasNext()) {
+                    String s = it.next();
                     if (Bukkit.getPlayer(s) != null) {
                         final String dest = waitingConnections.get(s);
-                        removeConnectingPlayer(s);
+                        it.remove();
                         initiateTeleport(s, dest);
                     }
                 }
