@@ -4,3 +4,7 @@ version: ${version}
 authors:
  - magl1te
 description: Multiinventory between servers
+commands:
+   farmwelt:
+     description: Debug command
+     usage: Syntax error!
