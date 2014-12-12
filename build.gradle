@@ -29,7 +29,6 @@ task copyPlugin(dependsOn: 'jar', type: Copy) {
     into "D:\\Projekte\\Test Server\\plugins"
 }
 
-// Replace text in plugin.yml
 processResources
         {
             // This will ensure that this task is redone when the versions change.
