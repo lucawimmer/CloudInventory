@@ -26,14 +26,13 @@ public class BukkitListener implements Listener {
 
     @EventHandler
     public void onServerJoin(PlayerPreLoginEvent e) {
-
         if (playerDest.containsKey(e.getName()))
             playerDest.remove(e.getName());
     }
 
     @EventHandler
     public void onServerJoined(PlayerJoinEvent e) throws IOException {
-        e.getPlayer().teleport(Bukkit.getWorld("world").getSpawnLocation());
+        e.getPlayer().teleport(Bukkit.getWorlds().get(0).getSpawnLocation());
         if (CloudInventory.getDefaultConfig().getBoolean("use-as-puffer")) {
             e.getPlayer().getInventory().clear();
             e.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 999, 999));
@@ -51,7 +50,7 @@ public class BukkitListener implements Listener {
         if (CloudInventory.getDefaultConfig().getBoolean("use-as-puffer")) {
             e.setQuitMessage(null);
         }
-        e.getPlayer().teleport(Bukkit.getWorld("world").getSpawnLocation());
+        e.getPlayer().teleport(Bukkit.getWorlds().get(0).getSpawnLocation());
     }
 
     @EventHandler
