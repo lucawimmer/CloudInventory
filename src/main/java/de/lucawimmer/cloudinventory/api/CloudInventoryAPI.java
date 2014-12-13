@@ -12,7 +12,6 @@ public class CloudInventoryAPI {
         if (!CloudInventory.getDefaultConfig().getBoolean("use-as-puffer") && CloudInventory.getDefaultConfig().getBoolean("enable-puffer")) {
             try {
                 String bungeename = CloudInventory.getDefaultConfig().getString("puffer-server").split(":")[3];
-                Bukkit.getPlayer(name).sendMessage(CloudInventory.getDefaultConfig().getString("puffer-server"));
                 try {
                     ByteArrayDataOutput out = ByteStreams.newDataOutput();
                     out.writeUTF("Connect");
