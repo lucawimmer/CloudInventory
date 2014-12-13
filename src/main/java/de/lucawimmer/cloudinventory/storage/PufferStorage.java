@@ -121,6 +121,11 @@ public class PufferStorage {
                         int seconds = 5;
 
                         public void run() {
+                            if (Bukkit.getPlayer(p) != null) {
+                                cancel();
+                                return;
+                            }
+
                             if (seconds > -1) {
                                 switch (seconds) {
                                     case 5:
@@ -153,7 +158,7 @@ public class PufferStorage {
                                                 } else {
                                                     out.writeUTF(CloudInventory.getDefaultConfig().getString("default-forward-server"));
                                                 }
-                                                if (Bukkit.getPlayer(p) != null)  Bukkit.getPlayer(p).sendPluginMessage((CloudInventory.getInstance()), "BungeeCord", out.toByteArray());
+                                                Bukkit.getPlayer(p).sendPluginMessage((CloudInventory.getInstance()), "BungeeCord", out.toByteArray());
                                             }
                                         } catch (Exception e) {
                                             e.printStackTrace();
