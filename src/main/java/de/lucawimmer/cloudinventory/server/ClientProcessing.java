@@ -52,7 +52,7 @@ public class ClientProcessing implements Runnable {
                             e.printStackTrace();
                         }
                     } else if (playerinfo.getHeader().equals("puffer; left;")) { //Spieler hat den Server verlassen => Eintrag in die Connection Liste
-                        BukkitListener.playerQueue.put(playerinfo.getPlayer(), s);
+                        PufferStorage.playerQueue.put(playerinfo.getPlayer(), s);
                         /*// TO PUFFER
                         String ip = playerinfo.getServer().split(":")[0];
                         Integer port = Integer.parseInt(playerinfo.getServer().split(":")[1]);

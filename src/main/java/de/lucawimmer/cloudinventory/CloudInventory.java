@@ -71,7 +71,7 @@ public class CloudInventory extends JavaPlugin {
 
         Bukkit.getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
         Bukkit.getServer().getPluginManager().registerEvents(new BukkitListener(), this);
-        getCommand("farmwelt").setExecutor(new FarmweltCommand());
+        //getCommand("farmwelt").setExecutor(new FarmweltCommand());
     }
 
     public void onDisable() {
