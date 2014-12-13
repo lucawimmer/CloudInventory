@@ -51,7 +51,8 @@ public class ClientProcessing implements Runnable {
                             e.printStackTrace();
                         }
                     } else if (playerinfo.getHeader().equals("puffer; left;")) { //Spieler hat den Server verlassen => Eintrag in die Connection Liste
-                        PufferStorage.playerQueue.put(playerinfo.getPlayer(), s);
+                        PufferStorage.removeConnectingPlayer(playerinfo.getPlayer());
+                        PufferStorage.addQueuedPlayer(playerinfo.getPlayer(), s);
                         Bukkit.getScheduler().scheduleSyncDelayedTask(CloudInventory.getInstance(), new Runnable() {
                             @Override
                             public void run() {

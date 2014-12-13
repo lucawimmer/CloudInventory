@@ -26,7 +26,15 @@ public class PufferStorage {
     }
 
     public static void removeConnectingPlayer(String p) {
-        waitingConnections.remove(p);
+        if(hasConnectingPlayer(p)) waitingConnections.remove(p);
+    }
+
+    public static void addQueuedPlayer(String p, String s) {
+        if(!hasQueuedPlayer(p)) playerQueue.put(p, s);
+    }
+
+    public static void removeQueuedPlayer(String p) {
+        if(hasQueuedPlayer(p)) playerQueue.remove(p);
     }
 
     public static String getConnectingPlayerDestination(String p) {
@@ -35,6 +43,13 @@ public class PufferStorage {
 
     public static boolean hasConnectingPlayer(String p) {
         if (waitingConnections.containsKey(p))
+            return true;
+
+        return false;
+    }
+
+    public static boolean hasQueuedPlayer(String p) {
+        if (playerQueue.containsKey(p))
             return true;
 
         return false;
