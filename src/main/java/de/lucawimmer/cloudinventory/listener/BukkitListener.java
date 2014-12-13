@@ -1,10 +1,7 @@
 package de.lucawimmer.cloudinventory.listener;
 
 import de.lucawimmer.cloudinventory.CloudInventory;
-import de.lucawimmer.cloudinventory.objects.ServerInfo;
-import de.lucawimmer.cloudinventory.storage.PufferStorage;
 import org.bukkit.Bukkit;
-import org.bukkit.craftbukkit.libs.com.google.gson.Gson;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;

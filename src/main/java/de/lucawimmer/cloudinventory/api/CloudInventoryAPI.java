@@ -27,7 +27,7 @@ public class CloudInventoryAPI {
                     BukkitListener.playerDest.remove(name);
                     BukkitListener.playerDest.put(name, dest);
                 }
-            } catch(Exception ex) {
+            } catch (Exception ex) {
                 ex.printStackTrace();
             }
         } else {

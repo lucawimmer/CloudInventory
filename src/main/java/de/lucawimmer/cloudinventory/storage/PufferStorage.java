@@ -18,8 +18,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 public class PufferStorage {
-    private static HashMap<String, String> waitingConnections = new HashMap<String, String>();
     public static HashMap<String, String> playerQueue = new HashMap<String, String>();
+    private static HashMap<String, String> waitingConnections = new HashMap<String, String>();
 
     public static void addConnectingPlayer(String p, String s) {
         waitingConnections.put(p, s);
@@ -97,7 +97,7 @@ public class PufferStorage {
     }
 
     private static void initiateTeleport(final String p, final String dest) {
-        if(Bukkit.getPlayer(p) != null) {
+        if (Bukkit.getPlayer(p) != null) {
             Bukkit.getServer().getScheduler().scheduleAsyncDelayedTask(CloudInventory.getInstance(), new Runnable() {
                 @Override
                 public void run() {

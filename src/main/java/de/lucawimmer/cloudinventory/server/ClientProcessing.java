@@ -1,7 +1,6 @@
 package de.lucawimmer.cloudinventory.server;
 
 import de.lucawimmer.cloudinventory.CloudInventory;
-import de.lucawimmer.cloudinventory.listener.BukkitListener;
 import de.lucawimmer.cloudinventory.objects.ServerInfo;
 import de.lucawimmer.cloudinventory.storage.PufferStorage;
 import org.bukkit.Bukkit;
