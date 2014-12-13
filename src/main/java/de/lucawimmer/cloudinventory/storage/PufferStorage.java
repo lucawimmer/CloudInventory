@@ -37,9 +37,6 @@ public class PufferStorage {
         if(hasQueuedPlayer(p)) playerQueue.remove(p);
     }
 
-    public static String getConnectingPlayerDestination(String p) {
-        return waitingConnections.get(p);
-    }
 
     public static boolean hasConnectingPlayer(String p) {
         if (waitingConnections.containsKey(p))
@@ -121,10 +118,6 @@ public class PufferStorage {
                         int seconds = 5;
 
                         public void run() {
-                            if (Bukkit.getPlayer(p) != null) {
-                                cancel();
-                                return;
-                            }
 
                             if (seconds > -1) {
                                 switch (seconds) {
@@ -145,7 +138,7 @@ public class PufferStorage {
                                         seconds--;
                                         break;
                                     case 1:
-                                        if (Bukkit.getPlayer(p) != null) Bukkit.getPlayer(p).sendMessage("§7[§6H§7] §fDu wirst in 1 Sekunden  teleportiert.");
+                                        if (Bukkit.getPlayer(p) != null) Bukkit.getPlayer(p).sendMessage("§7[§6H§7] §fDu wirst in 1 Sekunden teleportiert.");
                                         seconds--;
                                         break;
                                     case 0:
