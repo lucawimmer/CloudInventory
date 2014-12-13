@@ -12,6 +12,12 @@ public class CloudInventoryAPI {
         if (!CloudInventory.getDefaultConfig().getBoolean("use-as-puffer") && CloudInventory.getDefaultConfig().getBoolean("enable-puffer")) {
             try {
                 String bungeename = CloudInventory.getDefaultConfig().getString("puffer-server").split(":")[3];
+                if (!BukkitListener.playerDest.containsKey(name)) {
+                    BukkitListener.playerDest.put(name, dest);
+                } else {
+                    BukkitListener.playerDest.remove(name);
+                    BukkitListener.playerDest.put(name, dest);
+                }
                 try {
                     ByteArrayDataOutput out = ByteStreams.newDataOutput();
                     out.writeUTF("Connect");
@@ -19,12 +25,6 @@ public class CloudInventoryAPI {
                     Bukkit.getPlayer(name).sendPluginMessage((CloudInventory.getInstance()), "BungeeCord", out.toByteArray());
                 } catch (Exception e) {
                     e.printStackTrace();
-                }
-                if (!BukkitListener.playerDest.containsKey(name)) {
-                    BukkitListener.playerDest.put(name, dest);
-                } else {
-                    BukkitListener.playerDest.remove(name);
-                    BukkitListener.playerDest.put(name, dest);
                 }
             } catch (Exception ex) {
                 ex.printStackTrace();
