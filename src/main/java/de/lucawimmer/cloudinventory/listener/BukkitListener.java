@@ -5,9 +5,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerPreLoginEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.player.*;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.json.simple.JSONObject;
@@ -45,6 +43,21 @@ public class BukkitListener implements Listener {
             e.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.WITHER, 999, 999));
             e.getPlayer().setWalkSpeed(0.0F);
             e.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 10000, 128));
+            e.setJoinMessage(null);
+        }
+    }
+
+    @EventHandler
+    public void onServerLeft(PlayerQuitEvent e) throws IOException {
+        if (CloudInventory.getDefaultConfig().getBoolean("use-as-puffer")) {
+            e.setQuitMessage(null);
+        }
+    }
+
+    @EventHandler
+    public void onServerChat(PlayerCommandPreprocessEvent e) throws IOException {
+        if (CloudInventory.getDefaultConfig().getBoolean("use-as-puffer")) {
+            if(!e.getPlayer().hasPermission("cloudinventory.chat.use"))  e.setCancelled(true);
         }
     }
 
