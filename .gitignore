@@ -52,7 +52,6 @@ Thumbs.db
 
 target/
 *.out
-*.log
 *.epoch
 *.lck
 
@@ -63,12 +62,9 @@ target/
 .gradle
 build/
 
-.gradle
 bin/
-tmp/
 *.tmp
 *.bak
-build/
 .test/
 
 

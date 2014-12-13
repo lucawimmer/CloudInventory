@@ -77,7 +77,6 @@ public class ClientProcessing implements Runnable {
                                 } catch (IOException e) {
                                     e.printStackTrace();
                                 }
-
                             }
                         }, 20L * 3);
 

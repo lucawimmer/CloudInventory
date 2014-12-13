@@ -24,7 +24,6 @@ public class BukkitListener implements Listener {
 
     public static HashMap<String, String> playerDest = new HashMap<String, String>();
 
-
     @EventHandler
     public void onServerJoin(PlayerPreLoginEvent e) {
 
@@ -52,6 +51,7 @@ public class BukkitListener implements Listener {
         if (CloudInventory.getDefaultConfig().getBoolean("use-as-puffer")) {
             e.setQuitMessage(null);
         }
+        e.getPlayer().teleport(e.getPlayer().getWorld().getSpawnLocation());
     }
 
     @EventHandler

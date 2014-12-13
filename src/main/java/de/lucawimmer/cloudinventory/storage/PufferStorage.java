@@ -124,23 +124,23 @@ public class PufferStorage {
                             if (seconds > -1) {
                                 switch (seconds) {
                                     case 5:
-                                        Bukkit.getPlayer(p).sendMessage("§7[§6H§7] §fDu wirst in 5 Sekunden teleportiert.");
+                                        if (Bukkit.getPlayer(p) != null) Bukkit.getPlayer(p).sendMessage("§7[§6H§7] §fDu wirst in 5 Sekunden teleportiert.");
                                         seconds--;
                                         break;
                                     case 4:
-                                        Bukkit.getPlayer(p).sendMessage("§7[§6H§7] §fDu wirst in 4 Sekunden teleportiert.");
+                                        if (Bukkit.getPlayer(p) != null)  Bukkit.getPlayer(p).sendMessage("§7[§6H§7] §fDu wirst in 4 Sekunden teleportiert.");
                                         seconds--;
                                         break;
                                     case 3:
-                                        Bukkit.getPlayer(p).sendMessage("§7[§6H§7] §fDu wirst in 3 Sekunden teleportiert.");
+                                        if (Bukkit.getPlayer(p) != null)  Bukkit.getPlayer(p).sendMessage("§7[§6H§7] §fDu wirst in 3 Sekunden teleportiert.");
                                         seconds--;
                                         break;
                                     case 2:
-                                        Bukkit.getPlayer(p).sendMessage("§7[§6H§7] §fDu wirst in 2 Sekunden teleportiert.");
+                                        if (Bukkit.getPlayer(p) != null)  Bukkit.getPlayer(p).sendMessage("§7[§6H§7] §fDu wirst in 2 Sekunden teleportiert.");
                                         seconds--;
                                         break;
                                     case 1:
-                                        Bukkit.getPlayer(p).sendMessage("§7[§6H§7] §fDu wirst in 1 Sekunden  teleportiert.");
+                                        if (Bukkit.getPlayer(p) != null) Bukkit.getPlayer(p).sendMessage("§7[§6H§7] §fDu wirst in 1 Sekunden  teleportiert.");
                                         seconds--;
                                         break;
                                     case 0:
@@ -153,7 +153,7 @@ public class PufferStorage {
                                                 } else {
                                                     out.writeUTF(CloudInventory.getDefaultConfig().getString("default-forward-server"));
                                                 }
-                                                Bukkit.getPlayer(p).sendPluginMessage((CloudInventory.getInstance()), "BungeeCord", out.toByteArray());
+                                                if (Bukkit.getPlayer(p) != null)  Bukkit.getPlayer(p).sendPluginMessage((CloudInventory.getInstance()), "BungeeCord", out.toByteArray());
                                             }
                                         } catch (Exception e) {
                                             e.printStackTrace();
@@ -161,6 +161,8 @@ public class PufferStorage {
                                         cancel();
                                         break;
                                 }
+                            } else {
+                                cancel();
                             }
                         }
                     }.runTaskTimer(CloudInventory.getInstance(), 0, 20);
