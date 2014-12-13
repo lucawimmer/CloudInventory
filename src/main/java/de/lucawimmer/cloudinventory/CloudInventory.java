@@ -55,7 +55,7 @@ public class CloudInventory extends JavaPlugin {
         CONFIG.addDefault("servers", Arrays.asList("178.251.229.190:2152:pl3as3_ch@ng3_m3"));
         CONFIG.addDefault("enable-puffer", false, new String[]{"Enable a puffer server?"});
         CONFIG.addDefault("use-as-puffer", false, new String[]{"Do you want this server as puffer server?"});
-        CONFIG.addDefault("puffer-server", Arrays.asList("178.251.229.190:2153:pl3as3_ch@ng3_m3:bungeename", new String[]{"If you use this as puffer server its unimportant"}));
+        CONFIG.addDefault("puffer-server", "178.251.229.190:2153:pl3as3_ch@ng3_m3:bungeename", new String[]{"If you use this as puffer server its unimportant"});
         CONFIG.addDefault("default-forward-server", "default");
         CONFIG.saveConfig();
         try {
@@ -69,9 +69,9 @@ public class CloudInventory extends JavaPlugin {
             PufferStorage.pufferClientProccessing();
         }
 
+        Bukkit.getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
         Bukkit.getServer().getPluginManager().registerEvents(new BukkitListener(), this);
         getCommand("farmwelt").setExecutor(new FarmweltCommand());
-        Bukkit.getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
     }
 
     public void onDisable() {
