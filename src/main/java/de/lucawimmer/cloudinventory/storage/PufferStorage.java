@@ -22,7 +22,7 @@ public class PufferStorage {
     private static HashMap<String, String> waitingConnections = new HashMap<String, String>();
 
     public static void addConnectingPlayer(String p, String s) {
-        waitingConnections.put(p, s);
+        if(!hasConnectingPlayer(p)) waitingConnections.put(p, s);
     }
 
     public static void removeConnectingPlayer(String p) {
