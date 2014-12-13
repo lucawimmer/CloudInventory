@@ -60,7 +60,7 @@ public class ClientProcessing implements Runnable {
                                 String password = playerinfo.getOwnpassword();
 
                                 JSONObject json = new JSONObject();
-                                json.put("header", "server; transfer;");
+                                json.put("header", "clientsync");
                                 json.put("password", password);
                                 json.put("server", Bukkit.getServer().getIp() + ":" + CloudInventory.getDefaultConfig().getInt("port"));
                                 json.put("player", playerinfo.getPlayer());
